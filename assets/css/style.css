@@ -48,3 +48,9 @@ body {
 	font-size: 50px;
 	padding-left: 20px;
 }
+
+.scrolling-keys {
+	position: absolute;
+	bottom: 100px;
+	left: 900px
+}
