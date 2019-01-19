@@ -3,6 +3,10 @@ body {
 	background: grey;
 }
 
+header {
+	display: block;
+}
+
 #myVideo {
   position: fixed;
   right: 0;
@@ -19,19 +23,22 @@ body {
 }
 
 .slide {
-	height: 100vh;
+	height: 90vh;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-top: 150px;
 }
 
 .container {
-	width:960px;
-	height:600px;  
 	position: relative;
+	width:960px;
+	height:530px;  
 	margin:0 auto; 
+	background: transparent;
+	padding-top: 30px;
+	margin-top: 300px;
+	margin-bottom: 130px;
 }
 				
 .logo {
@@ -51,6 +58,12 @@ body {
 
 .scrolling-keys {
 	position: absolute;
-	bottom: 100px;
+	bottom: 30px;
 	left: 900px
+}
+
+.login {
+	position: absolute;
+	right: 440px;
+	bottom: 100px;
 }
