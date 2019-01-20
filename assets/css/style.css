@@ -35,18 +35,15 @@ header {
 	width:960px;
 	height:530px;  
 	margin:0 auto; 
-	background: white;
+	background: transparent;
 	padding-top: 30px;
 	margin-top: 300px;
 	margin-bottom: 130px;
 }
 				
 .logo {
-	color:#fff; 
-	font-family: 'Abel',sans-serif;
-	font-size:30px;
-	position: absolute;
-	padding: 20px;
+	border: 1px solid #f98634;
+	border-radius: 5px;
 }
 
 .brand-quote {

@@ -5,6 +5,11 @@ body {
 	background-color: white;
 }
 
+.logo {
+    border: 1px solid #f98634;
+    border-radius: 5px;
+}
+
 .btn:hover,
 .btn:focus,
 .btn:active{
