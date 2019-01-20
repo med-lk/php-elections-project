@@ -2,8 +2,9 @@ body {
 	margin-top: 60px;
 	font-size: 14px;
 	font-family: "Helvetica Nueue",Arial,Verdana,sans-serif;
-	background-color: #E5E9ED;
+	background-color: white;
 }
+
 .btn:hover,
 .btn:focus,
 .btn:active{
@@ -199,15 +200,14 @@ body {
 
 .title{
     color: #506A85;
-    text-align: center;
     font-weight: 300;
     font-size: 44px;
-    line-height: 90%;
+    line-height: 1%;
 }
 .title small{
     font-size: 17px;
-    color: #999;
-    text-transform: uppercase;
+    color: #506A8855;
+    text-transform: capitalize;
 }
 .space-30{
 	height: 30px;
