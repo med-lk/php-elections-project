@@ -202,14 +202,12 @@ body {
     text-align: center;
     font-weight: 300;
     font-size: 44px;
-    margin-bottom: 90px;
     line-height: 90%;
 }
 .title small{
     font-size: 17px;
     color: #999;
     text-transform: uppercase;
-    margin: 0;
 }
 .space-30{
 	height: 30px;
