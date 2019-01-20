@@ -25,15 +25,20 @@
 		   						<ion-icon name="home"></ion-icon> Home
 		   					</a>
 			   			</li>
-		   				<li class="nav-item">
-		   					<a class="nav-link" href="#about">
-		   						<ion-icon name="information-circle-outline"></ion-icon> About
+			   			<li class="nav-item">
+		   					<a class="nav-link" href="partiesList.html">
+		   						<ion-icon name="people"></ion-icon> Parties
 		   					</a>
 			   			</li>
 			   			<li class="nav-item">
 			   				<a class="nav-link" href="#news">
 			   					<ion-icon name="paper"></ion-icon> News
 			   				</a>
+			   			</li>
+		   				<li class="nav-item">
+		   					<a class="nav-link" href="#about">
+		   						<ion-icon name="information-circle-outline"></ion-icon> About
+		   					</a>
 			   			</li>
 			   			<li class="nav-item">
 			   				<a class="nav-link" href="#contact">
@@ -42,7 +47,7 @@
 			   			</li>
 			   			<li class="nav-item">
 			   				<a class="nav-link btn btn-outline-info" href="#" data-toggle="modal" data-target="#SignUp">
-			   					<ion-icon name="clipboard"></ion-icon> <strong>Sign up</strong>
+			   					<ion-icon name="person-add"></ion-icon> <strong>Sign up</strong>
 			   				</a>
 			   			</li>
 			        </ul>
@@ -50,19 +55,17 @@
 		    </nav>
 		</header>
 
-		<video autoplay loop muted id="myVideo">
+		<!-- <video autoplay loop muted id="myVideo">
 		  	<source src="assets/vid/preview.mp4" type="video/mp4" class="source">
-		</video>
+		</video> -->
 
 	   	<div class="scrolling-box">
 	   		<section id="home" class="slide">
 		   		<div class="container">
 		   		   	<h1>Home Section</h1>
 
-		   		   	<button class="btn btn-warning btn-lg login" class="button" data-toggle="modal"  data-target="#mymodal"style="color: #804000;">Login</button>
+		   		   	<button class="btn btn-warning btn-lg login" class="button" data-toggle="modal" data-target="#Login">Login</button>
  
-		   		   <a href="listecondidats.html">	<button style="color: #804000;" class="btn btn-warning btn-lg condidat" class="button">Condidat</button></a>
-		   		   
 			   		<div class="scrolling-keys">
 				   		<a href="#about" class="btn btn-sm btn-outline-info">
 				   			<ion-icon name="arrow-round-down"></ion-icon>
@@ -158,7 +161,7 @@
 			</div>
 		</div>
 
-		<div id="mymodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div id="Login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		   	<div class="modal-dialog modal-dialog-centered" role="document">
 		   		<div class="modal-content">
 		   		   	<div class="modal-header">
