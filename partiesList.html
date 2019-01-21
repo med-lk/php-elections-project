@@ -7,6 +7,7 @@
         <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link href='assets/css/rotating-card.css' rel='stylesheet' />
+        <link rel="stylesheetَ" type="text/css" href="assets/css/style.css">
 	</head>
     <body>
         <header>
@@ -47,7 +48,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-info" href="#" data-toggle="modal" data-target="#SignUp">
+                            <a class="nav-link btn btn-outline-info" href="#" data-toggle="modal" data-target="#SignUp1">
                                 <ion-icon name="person-add"></ion-icon> <strong>Sign up</strong>
                             </a>
                         </li>
@@ -55,13 +56,83 @@
                 </div>
             </nav>
         </header>
-
-        <div class="card" style="margin-top: 140px; margin-left: 50px; width: 57rem;">
-            <div class="card-header title">
-                <h2>Parties : </h2>
-                <small>leaders list</small>
+    <!-- Modal -->
+        <div  class="modal fade" id="SignUp1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Sign Up</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Full name : </label>
+                                <input type="text" class="form-control" placeholder="your full name">
+                            </div>
+                            <div class="form-group">
+                                <label>CIN : </label>
+                                <input type="text" class="form-control" placeholder="your cin">
+                            </div>
+                            <div class="form-group">
+                                <label>Password : </label>
+                                <input type="password" class="form-control" placeholder="your password">
+                            </div>
+                            <div class="form-group">
+                                <label>Re-Password : </label>
+                                <input type="password" class="form-control" placeholder="repeat your password">
+                            </div>
+                            <div class="form-group">
+                                <label>Birth date : </label>
+                                <input type="date" class="form-control" placeholder="your birth date">
+                            </div>
+                            <div class="form-group">
+                                <label>Address : </label>
+                                <input type="text" class="form-control" placeholder="your adresse">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone : </label>
+                                <input type="text" class="form-control" placeholder="your phone number">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="card-body row" style="margin-top: 50px;">
+        </div>
+        <div>
+        <div class="card" style="margin-top: 140px; margin-left: 240px; width: 70rem;  ">
+            <div class="card-header title">
+                <h1>Parties :</h1>
+            </div>
+                 <div style="margin: 30px; width:180%">
+                   <nav >
+                      <ul class="pagination" >
+                        
+                        <li class="page-item"><a class="page-link" href="العدالة و التنمية.html">العدالة والتنمية</a></li>
+                        <li class="page-item"><a class="page-link" href="الامل.html">الأمل </a></li>
+                        <li class="page-item"><a class="page-link" href="الاستقلال.html">الاستقلال </a></li>
+                        <li class="page-item"><a class="page-link" href="التجمع الوطني للأحرار.html">التجمع الوطني للأحرار</a></li>
+                        <li class="page-item"><a class="page-link" href="الاصالة والمعاصرة.html"> الاصالة والمعاصرة </a></li>
+                        <li class="page-item"><a class="page-link" href="الاتحاد الاشتراكي للقوات الشعبية.html">الاتحاد الاشتراكي للقوات الشعبية</a></li>
+                        <li class="page-item"><a class="page-link" href="الحركة الشعبية.html">الحركة الشعبية</a></li>
+                        <li class="page-item"><a class="page-link" href="النهضة والفضيلة.html">النهضة والفضيلة </a></li>
+                        <li class="page-item"><a class="page-link" href="الإتحاد الدستوري.html">الإتحاد الدستوري</a></li>
+                        <li class="page-item"><a class="page-link" href="الوسط الاجتماعي.html ">الوسط الاجتماعي </a></li>
+                        <li class="page-item disabled"><a class="page-link" href="leaders of parties.html" tabindex="-1">:حزب</a></li>
+                      </ul>
+                    </nav>
+                </div>
+                <div class="title">
+                <small style="margin: 0px 0px 0px 10px;"><u><strong>leaders list</strong></u></small>
+
+
+            </div>
+            <div class="card-body row" style="margin-top: 20px;">
                 <div class="col-sm-4">
                     <div class="card-container">
                         <div class="card">
@@ -205,7 +276,13 @@
                 </ul>
             </nav>
 		</div>
+</div>
+        
 
+        <script type="text/javascript" src="assets/js/app.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.js"></script>
+        <script type="text/javascript" src="assets/js/popper.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/ionicons@4.5.1/dist/ionicons.js"></script>
     </body>
 </html>
