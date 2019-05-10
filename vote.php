@@ -20,7 +20,7 @@
 .inner:hover img{
 	transform: scale(1.3);
 
-    content: url("assets/img/clean.png");
+    content: url("assets/img/papiers-peints-bon-signe.gif");
 
 }
         </style>

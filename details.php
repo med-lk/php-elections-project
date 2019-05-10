@@ -10,8 +10,16 @@
         <link href='assets/css/rotating-card.css' rel='stylesheet' />
         <link rel="stylesheetَ" type="text/css" href="assets/css/style.css">
     </head>
+<?php include('connection.php');
+$idpartie = $_GET["idp"];
 
-    <body style="background-image: url('assets/img/download.jpg');">
+$res = mysqli_query($conn,"SELECT * from partie where idpartie = $idpartie");
+
+$row = mysqli_fetch_assoc($res);
+
+ ?>
+
+    <body style="background-image: url('<?php echo$row["partie_image"]?>');">
         <header>
             <nav class="navbar fixed-top navbar-expand navbar-light bg-light">
                 <a class="navbar-brand logo" href="index.html#home">
@@ -60,33 +68,19 @@
         </header>
 
         <div style="margin: 160px 0px 0px 260px;">
-            <nav >
-                <ul class="pagination" >
-                    <li class="page-item"><a class="page-link" href="#party1">العدالة والتنمية</a></li>
-                    <li class="page-item"><a class="page-link" href="#party2" >الأمل </a></li>
-                    <li class="page-item"><a class="page-link" href="#party3">الاستقلال </a></li>
-                    <li class="page-item"><a class="page-link" href="#party4">التجمع الوطني للأحرار</a></li>
-                    <li class="page-item"><a class="page-link" href="#party5">الاصالة والمعاصرة </a></li>
-                    <li class="page-item"><a class="page-link" href="#party6">الاتحاد الاشتراكي للقوات الشعبية</a></li>
-                    <li class="page-item"><a class="page-link" href="#party7">الحركة الشعبية</a></li>
-                    <li class="page-item"><a class="page-link" href="#party8">النهضة والفضيلة </a></li>
-                    <li class="page-item"><a class="page-link" href="#party9">الإتحاد الدستوري</a></li>
-                    <li class="page-item"><a class="page-link" href="#party10">الوسط الاجتماعي </a></li>
-                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">: حزب</a></li>
-                </ul>
-            </nav>
+            
         </div>
         <div style="margin: 60px;">
             <div class="container" style="background-color: #f2f2f2; box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12); " align="center">
              	<div class="row justify-content-center" style="height: 950px;">
              		<div class="col-0">
                         <div class="alert alert-primary" role="alert">
-                            <h2 align="center">العدالة والتنمية</h2>
+                            <h2 align="center"><?php echo$row["full_name"]?></h2>
                         </div>
                     </div>
                     <div class="col-0" align="center">
-                        <img width="200" height="200" src="assets/img/Saad-Eddine_Al-Othmani.jpg" class="rounded-circle float-center" alt="Sample image" />
-                        <h4>عد الدين العثماني</h4><br />
+                        <img width="200" height="200" src="<?php echo$row["leader_image"]?>" class="rounded-circle float-center" alt="Sample image" />
+                        <h4><?php echo$row["leader_name"]?></h4><br />
                             <div class="col-md-6 alert alert-info">
                                 <h5>les condidats</h5><br />
                                 <div class="row justify-content-center">
@@ -116,7 +110,7 @@
                             </div><br><br><br>
                             <div class="row justify-content-end">
                                 <div class="col-4">
-                                    <a href="#"><button type="button" class="btn btn-outline-info btn-lg" style="width: 12rem;"><strong>Voter</strong></button></a><br>
+                                    <a href="vote.php"><button type="button" class="btn btn-outline-info btn-lg" style="width: 12rem;"><strong>Voter</strong></button></a><br>
                                 </div>
                             </div>
                         </div>

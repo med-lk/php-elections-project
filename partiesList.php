@@ -3,12 +3,13 @@
     <head>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <title>Parties</title>
-        <meta charset="utf-8">
+        <meta charset="utf-16">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-6" />
         <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link href='assets/css/rotating-card.css' rel='stylesheet' />
         <link rel="stylesheetَ" type="text/css" href="assets/css/style.css">
-	</head>
+    </head>
     <body>
         <header>
             <nav class="navbar fixed-top navbar-expand navbar-light bg-light">
@@ -109,8 +110,13 @@
             <div class="card-header title text-center">
                 <h1>Parties :</h1>
             </div>
+ <div class="card-body row" style="margin-top: 20px;">
+<?php 
+include("connection.php");
+$res = mysqli_query($conn,"SELECT * from partie");
 
-            <div class="card-body row" style="margin-top: 20px;">
+while ($row = mysqli_fetch_assoc($res)) {  ?>
+           
                 <div class="col-sm-4">
                     <div class="card-container">
                         <div class="card">
@@ -119,15 +125,15 @@
                                     <img src="assets/img/rotating_card_thumb2.png"/>
                                 </div>
                                 <div class="user">
-                                    <img class="img-circle" src="assets/img/Saad-Eddine_Al-Othmani.jpg"/>
+                                    <img class="img-circle" src="<?php echo$row["leader_image"] ?>"/>
                                 </div>
                                 <div class="content">
                                     <div class="main">
-                                        <h3 class="name">سعد الدين العثماني</h3>
+                                        <h3 class="name"><?php echo$row["leader_name"] ?></h3>
                                         <p class="profession">: حزب</p><br>
                                         <p class="text-center">                    
                                             <div class="user">
-                                                <img class="img-circle" src="assets/img/hqdefault.jpg"/>
+                                                <img class="img-circle" src="<?php echo$row["partie_image"] ?>"/>
                                             </div>
                                         </p>
                                     </div>
@@ -145,7 +151,7 @@
                                     </div>
                                 </div>
                                 <div align="center">
-                                <a href="details.html" ><button class="btn btn-primary btn-outline-info" > Parties</button></a>
+                                <a href="details.php?idp=<?php echo$row["idpartie"]?>"><button class="btn btn-primary btn-outline-info" > Parties</button></a>
                                 </div>
                                 <div class="footer">
                                     <div class="social-links text-center">
@@ -158,111 +164,11 @@
                         </div> <!-- end card -->
                     </div> <!-- end card-container -->
                 </div> <!-- end col sm 3 -->
-                <div class="col-sm-4">
-                    <div class="card-container">
-                        <div class="card">
-                            <div class="front">
-                                <div class="cover">
-                                    <img src="assets/img/rotating_card_thumb2.png"/>
-                                </div>
-                                <div class="user">
-                                    <img class="img-circle" src="assets/img/Saad-Eddine_Al-Othmani.jpg"/>
-                                </div>
-                                <div class="content">
-                                    <div class="main">
-                                        <h3 class="name">سعد الدين العثماني</h3>
-                                        <p class="profession">: حزب</p><br>
-                                        <p class="text-center">                    
-                                            <div class="user">
-                                                <img class="img-circle" src="assets/img/hqdefault.jpg"/>
-                                            </div>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> <!-- end front panel -->
-                            <div class="back">
-                                <div class="header">
-                                    <h5 class="motto">"Président Du Jarti Justice Et Développement"</h5>
-                                </div>
-                                <div class="content">
-                                    <div class="main">
-                                        <h4 class="text-center">Réformes Proposées</h4>
-                                        <p class="text-center">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
-                                        <div class="stats-container"></div>
-                                    </div>
-                                </div>
-                                <div align="center">
-                                <a href="details.html" ><button class="btn btn-primary btn-outline-info" > Parties</button></a>
-                                </div>
-                                <div class="footer">
-                                    <div class="social-links text-center">
-                                        <a href="#" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
-                                        <a href="#" class="google"><i class="fa fa-google-plus fa-fw"></i></a>
-                                        <a href="#" class="twitter"><i class="fa fa-twitter fa-fw"></i></a>
-                                    </div>
-                                </div>
-                            </div> <!-- end back panel -->
-                        </div> <!-- end card -->
-                    </div> <!-- end card-container -->
-                </div> <!-- end col sm 3 -->
-                <div class="col-sm-4">
-                    <div class="card-container">
-                        <div class="card">
-                            <div class="front">
-                                <div class="cover">
-                                    <img src="assets/img/rotating_card_thumb2.png"/>
-                                </div>      
-                                <div class="user">
-                                    <img class="img-circle" src="assets/img/Saad-Eddine_Al-Othmani.jpg"/>
-                                </div>
-                                <div class="content">
-                                    <div class="main">
-                                        <h3 class="name">سعد الدين العثماني</h3>
-                                        <p class="profession">: حزب</p><br>
-                                        <p class="text-center">                    
-                                            <div class="user">
-                                                <img class="img-circle" src="assets/img/hqdefault.jpg"/>
-                                            </div>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> <!-- end front panel -->
-                            <div class="back">
-                                <div class="header">
-                                    <h5 class="motto">"Président Du Jarti Justice Et Développement"</h5>
-                                </div>
-                                <div class="content">
-                                    <div class="main">
-                                        <h4 class="text-center">Réformes Proposées</h4>
-                                        <p class="text-center">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
-                                        <div class="stats-container"></div>
-                                    </div>
-                                </div>
-                                <div align="center">
-                                <a href="details.html" ><button class="btn btn-primary btn-outline-info" > Parties</button></a>
-                                </div>                                
-                                <div class="footer">
-                                    <div class="social-links text-center">
-                                        <a href="#" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
-                                        <a href="#" class="google"><i class="fa fa-google-plus fa-fw"></i></a>
-                                        <a href="#" class="twitter"><i class="fa fa-twitter fa-fw"></i></a>
-                                    </div>
-                                </div>
-                            </div> <!-- end back panel -->
-                        </div> <!-- end card -->
-                    </div> <!-- end card-container -->
-                </div> <!-- end col sm 3 -->
-            </div> 
-            <nav class="d-flex justify-content-center">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-		</div>
+
+
+<?php }  ?>
+</div>
+
 </div>
         
 
