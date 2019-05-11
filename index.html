@@ -10,6 +10,65 @@
         <link href='assets/css/rotating-card.css' rel='stylesheet' />
 	</head>
 	<body>
+		<script type="text/javascript">
+			function verifier(){
+		var name = document.forms["f"]["name"];
+		var lastname = document.forms["f"]["lastname"];
+		var cin = document.forms["f"]["cin"];
+		var password = document.forms["f"]["password"];
+		var datenaiss = document.forms["f"]["datenaiss"];
+		var address = document.forms["f"]["address"];
+		var tel = document.forms["f"]["phone"];
+
+    	if (name.value == "") {
+              name.style.border = "1px solid red";
+           	  name.focus();
+           	  return false;
+    		
+}
+    	if (lastname.value == "" ) {
+              lastname.style.border = "1px solid red";
+           	  lastname.focus();
+           	  return false;
+    		
+}
+        if (cin.value == "" ) {
+              cin.style.border = "1px solid red";
+           	  cin.focus();
+           	  return false;
+    		
+}
+
+    	if (password.value == "" ) {
+              password.style.border = "1px solid red";
+           	  password.focus();
+           	  return false;
+    		
+}
+
+    	if (datenaiss.value == "" ) {
+              datenaiss.style.border = "1px solid red";
+           	  datenaiss.focus();
+           	  return false;
+    		
+}
+
+    	if (address.value == "" ) {
+              address.style.border = "1px solid red";
+           	  address.focus();
+           	  return false;
+    		
+}
+
+    	if (tel.value == "" ) {
+              tel.style.border = "1px solid red";
+           	  tel.focus();
+           	  return false;
+    		
+}
+return true;
+	}
+		</script>
 		<header>
 	   		<nav class="navbar fixed-top navbar-expand navbar-light bg-light">
 	   			<a class="navbar-brand logo" href="#home">
@@ -238,39 +297,39 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form>
+					<form action="inscription.php" method="POST" name="f" onsubmit="return verifier();">
 						<div class="modal-body">
 							<div class="form-group">
-						    	<label>Full name : </label>
-						    	<input type="text" class="form-control" placeholder="your full name">
+						    	<label>name : </label>
+						    	<input type="text" class="form-control" placeholder="your full name" name="name">
+						  	</div>
+						  	<div class="form-group">
+						    	<label>Last name : </label>
+						    	<input type="text" class="form-control" placeholder="your full name" name="lastname">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>CIN : </label>
-						    	<input type="text" class="form-control" placeholder="your cin">
+						    	<input type="text" class="form-control" placeholder="your cin" name="cin">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Password : </label>
-						    	<input type="password" class="form-control" placeholder="your password">
-						  	</div>
-						  	<div class="form-group">
-						    	<label>Re-Password : </label>
-						    	<input type="password" class="form-control" placeholder="repeat your password">
+						    	<input type="password" class="form-control" placeholder="your password" name="password">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Birth date : </label>
-						    	<input type="date" class="form-control" placeholder="your birth date">
+						    	<input type="date" class="form-control" placeholder="your birth date" name="datenaiss">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Address : </label>
-						    	<input type="text" class="form-control" placeholder="your adresse">
+						    	<input type="text" class="form-control" placeholder="your adresse" name="address">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Phone : </label>
-						    	<input type="text" class="form-control" placeholder="your phone number">
+						    	<input type="text" class="form-control" placeholder="your phone number" name="phone">
 						  	</div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" class="btn btn-primary" name="valideInscrit">Submit</button>
 						</div>
 					</form>
 				</div>
@@ -298,7 +357,7 @@
 						  	</div>
 			   		   	</div>
 			   		   	<div class="modal-footer">
-			   		   		<button type="submit" class="btn btn-primary">Enter</button>
+			   		   		<button type="submit" class="btn btn-primary" name="valideLogin">Enter</button>
 			   		   	</div>
 		   		   	</form>
 		   		</div>
