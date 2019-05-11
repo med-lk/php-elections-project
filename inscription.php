@@ -26,9 +26,11 @@ $_SESSION["CIN"] = $cin;
 
 }else{
 	echo "<script>alert('Cin n\'existe pas')</script>";
+	header('location:index.html');
 }
 }else{
 	echo "<script>alert('Ce Citoyen est deja inscrit')</script>";
+	header('location:index.html');
 }
 }
 ?>

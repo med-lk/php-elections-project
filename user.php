@@ -15,6 +15,15 @@
 	   			<a class="navbar-brand logo" href="index.html">
 	   				<img src="assets/img/logo.PNG">
 	   			</a>
+          <ul class="navbar-nav float-right" style="margin: 0px 0px 0px 1050px;">
+                <li class="nav-item">
+              <form action="" method="POST">
+                <button type="submit" class="btn" name="deconnection">
+                  <ion-icon name="home"></ion-icon> Déconnecte
+                </button>
+              </form>
+              </li>
+            </ul>
 		    </nav>
 		</header>
 		
@@ -23,27 +32,25 @@
   <div class="row content" style="margin: 150px 30px 200px 0px;">
     <?php
     session_start();
-    if ($_SESSION["CIN"] == "") {
-      header('location:index.html');
-    }
-    $cin = $_SESSION["CIN"];
+    if ($_SESSION["CIN"] <> "") {
+          $cin = $_SESSION["CIN"];
     include('connection.php');
     $req = mysqli_query($conn,"SELECT * FROM citoyen where cin ='$cin'");
-if ($res = mysqli_fetch_assoc($req)){
 
+    if ($res = mysqli_fetch_assoc($req)){
     ?>
-    <div class="col-sm-2 sidenav">
-
-        <img class="img-circle" src="<?php echo$res["image"]; ?>" width="200" height="200" />
-
-    </div>
-<?php } ?>
-    <?php  
+        <?php  
     
     $req = mysqli_query($conn,"SELECT * FROM inscrit where cin ='$cin'");
 if ($row = mysqli_fetch_assoc($req)){
 
      ?>
+    <div class="col-sm-2 sidenav">
+
+        <img class="img-circle" src="<?php echo$res["image"]; ?>" width="200" height="200" />
+
+    </div>
+
     <div class="col-sm-8 text-left"> 
       <table class="table" style="margin-top:30px; " >
     <tbody>
@@ -85,7 +92,7 @@ if ($row = mysqli_fetch_assoc($req)){
       <tr>
 
         <td>PassWord</td>
-        <td><?php echo$row["password"]; ?></td>
+        <td>***********</td>
          <td><button type="button" class="btn btn-light btn-sm">Modify</button></td>
 
       </tr>
@@ -99,7 +106,13 @@ if ($row = mysqli_fetch_assoc($req)){
 
     </tbody>
   </table>
-  <?php } ?>
+  <?php } 
+
+ } 
+}else{
+  header('location:index.html');
+}
+?>
     </div>
     <div class="card-body row">
     <div class="col-sm-12 sidenav">
@@ -124,5 +137,14 @@ if ($row = mysqli_fetch_assoc($req)){
 <footer class="container-fluid text-center">
   <p>Footer Text</p>
 </footer>
+
+<?php
+if (isset($_POST["deconnection"])) {
+
+session_unset(); 
+ header('location:index.html');
+}
+
+?>
 </body>
 </html>
