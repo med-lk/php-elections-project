@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 10, 2019 at 03:27 PM
+-- Generation Time: May 11, 2019 at 04:32 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
 
@@ -36,6 +36,16 @@ CREATE TABLE IF NOT EXISTS `citoyen` (
   `image` varchar(100) NOT NULL DEFAULT 'assets/img/user.png',
   PRIMARY KEY (`Cin`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `citoyen`
+--
+
+INSERT INTO `citoyen` (`Cin`, `Nom`, `prenom`, `image`) VALUES
+('EE12345', 'Ziadi', 'mohamed', 'assets/img/profile/Photo-profil-professionnelle-par-photographe-entreprise10.jpg'),
+('EE733511', 'hassan', 'abdo', 'assets/img/profile/images.jpg'),
+('EE445599', 'ben Ziad', 'fatima', 'assets/img/profile/formidable.jpg'),
+('EE987445', 'mohcin', 'ileas', 'assets/img/profile/user.png');
 
 -- --------------------------------------------------------
 
@@ -76,10 +86,18 @@ CREATE TABLE IF NOT EXISTS `inscrit` (
   `tele` varchar(10) NOT NULL,
   `password` varchar(20) NOT NULL,
   `datnaiss` date NOT NULL,
-  `idpartie` int(11) NOT NULL,
+  `idpartie` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cin`),
   KEY `FK_partie` (`idpartie`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `inscrit`
+--
+
+INSERT INTO `inscrit` (`cin`, `Nom`, `prenom`, `adresse`, `tele`, `password`, `datnaiss`, `idpartie`) VALUES
+('EE733511', 'qsd', 'sdsq', 'qsd@gmail.com', '06325557', '15646', '2019-05-23', 0),
+('EE12345', 'aze', 'qdds', 'qsd@gmail.com', '06325557', '123', '2019-05-20', 0);
 
 -- --------------------------------------------------------
 
