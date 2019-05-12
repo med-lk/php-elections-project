@@ -20,6 +20,66 @@ $row = mysqli_fetch_assoc($res);
  ?>
 
     <body style="background-image: url('<?php echo$row["partie_image"]?>');">
+
+        <script type="text/javascript">
+            function verifier(){
+        var name = document.forms["f"]["name"];
+        var lastname = document.forms["f"]["lastname"];
+        var cin = document.forms["f"]["cin"];
+        var password = document.forms["f"]["password"];
+        var datenaiss = document.forms["f"]["datenaiss"];
+        var address = document.forms["f"]["address"];
+        var tel = document.forms["f"]["phone"];
+
+        if (name.value == "") {
+              name.style.border = "1px solid red";
+              name.focus();
+              return false;
+            
+}
+        if (lastname.value == "" ) {
+              lastname.style.border = "1px solid red";
+              lastname.focus();
+              return false;
+            
+}
+        if (cin.value == "" ) {
+              cin.style.border = "1px solid red";
+              cin.focus();
+              return false;
+            
+}
+
+        if (password.value == "" ) {
+              password.style.border = "1px solid red";
+              password.focus();
+              return false;
+            
+}
+
+        if (datenaiss.value == "" ) {
+              datenaiss.style.border = "1px solid red";
+              datenaiss.focus();
+              return false;
+            
+}
+
+        if (address.value == "" ) {
+              address.style.border = "1px solid red";
+              address.focus();
+              return false;
+            
+}
+
+        if (tel.value == "" ) {
+              tel.style.border = "1px solid red";
+              tel.focus();
+              return false;
+            
+}
+return true;
+    }
+        </script>
         <header>
             <nav class="navbar fixed-top navbar-expand navbar-light bg-light">
                 <a class="navbar-brand logo" href="index.html#home">
@@ -32,6 +92,11 @@ $row = mysqli_fetch_assoc($res);
                 <div class="collapse navbar-collapse" id="navbarsExample02">
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav float-right">
+                       <?php
+                        session_start();
+                         if (!isset($_SESSION["CIN"])) {
+                            
+                         ?>
                         <li class="nav-item">
                             <a class="nav-link" href="index.html#home">
                                 <ion-icon name="home"></ion-icon> Home
@@ -57,11 +122,19 @@ $row = mysqli_fetch_assoc($res);
                                 <ion-icon name="call"></ion-icon> Contact Us
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link btn btn-outline-info" href="#" data-toggle="modal" data-target="#SignUp">
                                 <ion-icon name="person-add"></ion-icon> <strong>Sign up</strong>
                             </a>
                         </li>
+                    <?php }else{ ?>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-info" href="user.php">
+                                <img src="assets/img/download.png" width="50" height="50">
+                            </a>
+                        </li>
+                    <?php } ?>
                     </ul>
                 </div>
             </nav>
@@ -109,15 +182,25 @@ $row = mysqli_fetch_assoc($res);
                                 </div>
                             </div><br><br><br>
                             <div class="row justify-content-end">
+                                <?php
+                       
+                                 if (isset($_SESSION["CIN"])) {
+                            
+                                ?>
                                 <div class="col-4">
                                     <a href="vote.php"><button type="button" class="btn btn-outline-info btn-lg" style="width: 12rem;"><strong>Voter</strong></button></a><br>
                                 </div>
+                                <?php }else{ ?>
+                                    <a class="nav-link btn btn-outline-info btn-lg" href="#" data-toggle="modal" data-target="#SignUp" style="width: 12rem;"><ion-icon name="person-add"></ion-icon> <strong>Sign up</strong>
+                                    </a>
+
+
+                                    <?php } ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <!-- Modal -->
         <div  class="modal fade" id="SignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -128,39 +211,39 @@ $row = mysqli_fetch_assoc($res);
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form>
+                    <form action="inscription.php" method="POST" name="f" onsubmit="return verifier();">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Full name : </label>
-                                <input type="text" class="form-control" placeholder="your full name">
+                                <label>name : </label>
+                                <input type="text" class="form-control" placeholder="your full name" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label>Last name : </label>
+                                <input type="text" class="form-control" placeholder="your full name" name="lastname">
                             </div>
                             <div class="form-group">
                                 <label>CIN : </label>
-                                <input type="text" class="form-control" placeholder="your cin">
+                                <input type="text" class="form-control" placeholder="your cin" name="cin">
                             </div>
                             <div class="form-group">
                                 <label>Password : </label>
-                                <input type="password" class="form-control" placeholder="your password">
-                            </div>
-                            <div class="form-group">
-                                <label>Re-Password : </label>
-                                <input type="password" class="form-control" placeholder="repeat your password">
+                                <input type="password" class="form-control" placeholder="your password" name="password">
                             </div>
                             <div class="form-group">
                                 <label>Birth date : </label>
-                                <input type="date" class="form-control" placeholder="your birth date">
+                                <input type="date" class="form-control" placeholder="your birth date" name="datenaiss">
                             </div>
                             <div class="form-group">
                                 <label>Address : </label>
-                                <input type="text" class="form-control" placeholder="your adresse">
+                                <input type="text" class="form-control" placeholder="your adresse" name="address">
                             </div>
                             <div class="form-group">
                                 <label>Phone : </label>
-                                <input type="text" class="form-control" placeholder="your phone number">
+                                <input type="text" class="form-control" placeholder="your phone number" name="phone">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" name="valideInscrit">Submit</button>
                         </div>
                     </form>
                 </div>

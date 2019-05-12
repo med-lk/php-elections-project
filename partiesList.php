@@ -23,6 +23,11 @@
                 <div class="collapse navbar-collapse" id="navbarsExample02">
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav float-right">
+                        <?php
+                        session_start();
+                         if (!isset($_SESSION["CIN"])) {
+                            
+                         ?>
                         <li class="nav-item">
                             <a class="nav-link" href="index.html#home">
                                 <ion-icon name="home"></ion-icon> Home
@@ -48,11 +53,19 @@
                                 <ion-icon name="call"></ion-icon> Contact Us
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link btn btn-outline-info" href="#" data-toggle="modal" data-target="#SignUp">
                                 <ion-icon name="person-add"></ion-icon> <strong>Sign up</strong>
                             </a>
                         </li>
+                    <?php }else{ ?>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-info" href="user.php">
+                                <img src="assets/img/download.png" width="50" height="50">
+                            </a>
+                        </li>
+                    <?php } ?>
                     </ul>
                 </div>
             </nav>

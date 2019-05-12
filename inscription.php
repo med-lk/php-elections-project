@@ -24,9 +24,8 @@ $_SESSION["CIN"] = $cin;
 
 
 
-}else{
+}else{ 
 	echo "<script>alert('Cin n\'existe pas')</script>";
-	
 	header('location:index.html');
 }
 }else{
@@ -43,7 +42,8 @@ if (isset($_POST["valideLogin"])) {
 		$_SESSION["CIN"] = $cinlog;
 	    header('location:user.php');
 	}else{
-		echo "<script>alert('ERROR SUR CIN OU LE MOT DE PASS')</script>";
+	echo "<script>alert('ERROR SUR CIN OU LE MOT DE PASS')</script>";
+	header('location:index.html');
 	}
 
 }
