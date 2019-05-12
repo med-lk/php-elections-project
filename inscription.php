@@ -26,11 +26,11 @@ $_SESSION["CIN"] = $cin;
 
 }else{ 
 	echo "<script>alert('Cin n\'existe pas')</script>";
-	header('location:index.html');
+	//header('location:index.php');
 }
 }else{
 	echo "<script>alert('Ce Citoyen est deja inscrit')</script>";
-	header('location:index.html');
+	//header('location:index.php');
 }
 }
 if (isset($_POST["valideLogin"])) {
@@ -43,7 +43,7 @@ if (isset($_POST["valideLogin"])) {
 	    header('location:user.php');
 	}else{
 	echo "<script>alert('ERROR SUR CIN OU LE MOT DE PASS')</script>";
-	header('location:index.html');
+	//header('location:index.php');
 	}
 
 }

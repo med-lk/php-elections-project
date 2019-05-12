@@ -12,7 +12,7 @@
 <body>
 		<header>
 	   		<nav class="navbar fixed-top navbar-expand navbar-light bg-light">
-	   			<a class="navbar-brand logo" href="index.html">
+	   			<a class="navbar-brand logo" href="index.php">
 	   				<img src="assets/img/logo.PNG">
 	   			</a>
           <ul class="navbar-nav float-right" style="margin: 0px 0px 0px 1050px;">
@@ -110,7 +110,7 @@ if ($row = mysqli_fetch_assoc($req)){
 
  } 
 }else{
-  header('location:index.html');
+  header('location:index.php');
 }
 ?>
     </div>
@@ -142,7 +142,7 @@ if ($row = mysqli_fetch_assoc($req)){
 if (isset($_POST["deconnection"])) {
 
 session_unset(); 
- header('location:index.html');
+ header('location:index.php');
 }
 
 ?>

@@ -89,6 +89,7 @@ return true;
 return true;
     }
 		</script>
+        <?php session_start(); ?>
 		<header>
 	   		<nav class="navbar fixed-top navbar-expand navbar-light bg-light">
 	   			<a class="navbar-brand logo" href="#home">
@@ -126,11 +127,23 @@ return true;
 			   					<ion-icon name="call"></ion-icon> Contact Us
 			   				</a>
 			   			</li>
+                        <?php
+                        
+                         if (!isset($_SESSION["CIN"])) {
+                            
+                         ?>
 			   			<li class="nav-item">
 			   				<a class="nav-link btn btn-outline-info" href="#" data-toggle="modal" data-target="#SignUp">
 			   					<ion-icon name="person-add"></ion-icon> <strong>Sign up</strong>
 			   				</a>
 			   			</li>
+                        <?php }else{ ?>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-info" href="user.php">
+                                <img src="assets/img/download.png" width="30" height="30">
+                            </a>
+                        </li>
+                    <?php } ?>
 			        </ul>
 		      	</div>
 		    </nav>
@@ -144,8 +157,12 @@ return true;
 	   		<section id="home" class="slide">
 		   		<div class="container">
 		   		   	<h1>Home Section</h1>
-
+                        <?php
+                         if (!isset($_SESSION["CIN"])) {
+                            
+                         ?>
 		   		   	<button class="btn btn-warning btn-lg login" class="button" data-toggle="modal" data-target="#Login">Login</button>
+                   <?php } ?>
  
 			   		<div class="scrolling-keys" style="margin: 0px 0px 0px 200px;">
 				   		<a href="#about" class="btn btn-sm btn-outline-info">
