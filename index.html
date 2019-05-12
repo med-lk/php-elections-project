@@ -68,6 +68,26 @@
 }
 return true;
 	}
+    function verifier_champ(){
+        var cinlog = document.forms["vf"]["cinlog"];
+        var pass = document.forms["vf"]["pass"];
+       
+
+            if (cinlog.value == "" ) {
+              cinlog.style.border = "1px solid red";
+              cinlog.focus();
+              return false;
+            
+}
+
+        if (pass.value == "" ) {
+              pass.style.border = "1px solid red";
+              pass.focus();
+              return false;
+            
+} 
+return true;
+    }
 		</script>
 		<header>
 	   		<nav class="navbar fixed-top navbar-expand navbar-light bg-light">
@@ -345,15 +365,15 @@ return true;
 							<span aria-hidden="true">&times;</span>
 						</button>
 		   		   	</div>
-		   		   	<form>
+		   		   	<form action="inscription.php" method="POST" name="vf" onsubmit="return verifier_champ();">
 			   		   	<div class="modal-body">
 			   		   		<div class="form-group">
 						    	<label>CIN : </label>
-						    	<input type="text" class="form-control" placeholder="Your CIN">
+						    	<input type="text" class="form-control" placeholder="Your CIN" name="cinlog">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Password : </label>
-						    	<input type="text" class="form-control" placeholder="Your Password">
+						    	<input type="text" class="form-control" placeholder="Your Password" name="pass">
 						  	</div>
 			   		   	</div>
 			   		   	<div class="modal-footer">

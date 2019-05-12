@@ -1,6 +1,8 @@
 <?php
 include('connection.php');
 session_start();
+if (isset($_POST["valideInscrit"])) {
+
 $name = $_POST["name"];
 $lastname = $_POST["lastname"];
 $cin = $_POST["cin"];
@@ -8,8 +10,6 @@ $password = $_POST["password"];
 $datenaiss = $_POST["datenaiss"];
 $address = $_POST["address"];
 $phone = $_POST["phone"];
-if (isset($_POST["valideInscrit"])) {
-
 
 $req = mysqli_query($conn,"SELECT * FROM citoyen where cin ='$cin'");
 $exe = mysqli_query($conn,"SELECT * FROM inscrit where cin ='$cin'");
@@ -26,11 +26,25 @@ $_SESSION["CIN"] = $cin;
 
 }else{
 	echo "<script>alert('Cin n\'existe pas')</script>";
+	
 	header('location:index.html');
 }
 }else{
 	echo "<script>alert('Ce Citoyen est deja inscrit')</script>";
 	header('location:index.html');
 }
+}
+if (isset($_POST["valideLogin"])) {
+	$cinlog = $_POST["cinlog"];
+	$pass = $_POST["pass"];
+	$exe1 = mysqli_query($conn,"SELECT * FROM inscrit where cin ='$cinlog' and password='$pass'");
+	$nbr2 = mysqli_num_rows($exe1);
+	if ($nbr2 == 1) {
+		$_SESSION["CIN"] = $cinlog;
+	    header('location:user.php');
+	}else{
+		echo "<script>alert('ERROR SUR CIN OU LE MOT DE PASS')</script>";
+	}
+
 }
 ?>
