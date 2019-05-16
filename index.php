@@ -11,83 +11,33 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			function verifier(){
-		var name = document.forms["f"]["name"];
-		var lastname = document.forms["f"]["lastname"];
-		var cin = document.forms["f"]["cin"];
-		var password = document.forms["f"]["password"];
-		var datenaiss = document.forms["f"]["datenaiss"];
-		var address = document.forms["f"]["address"];
-		var tel = document.forms["f"]["phone"];
-
-    	if (name.value == "") {
-              name.style.border = "1px solid red";
-           	  name.focus();
-           	  return false;
+			const verifyInscriptionForm = () => {
+				let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["inscriptionForm"].elements;
+				let verified = true;
+				[firstName, lastName, cin, password, birthDate, address, phone].forEach(input=>{
+					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
+				})
+				return verified;
+			}
     		
-}
-    	if (lastname.value == "" ) {
-              lastname.style.border = "1px solid red";
-           	  lastname.focus();
-           	  return false;
-    		
-}
-        if (cin.value == "" ) {
-              cin.style.border = "1px solid red";
-           	  cin.focus();
-           	  return false;
-    		
-}
+			function verifier_champ(){
+        		var cinlog = document.forms["loginForm"]["cinlog"];
+        		var pass = document.forms["loginForm"]["pass"];
 
-    	if (password.value == "" ) {
-              password.style.border = "1px solid red";
-           	  password.focus();
-           	  return false;
-    		
-}
+	            if (cinlog.value == "" ) {
+    	          	cinlog.style.border = "1px solid red";
+              		cinlog.focus();
+              		return false;
+				}
 
-    	if (datenaiss.value == "" ) {
-              datenaiss.style.border = "1px solid red";
-           	  datenaiss.focus();
-           	  return false;
-    		
-}
-
-    	if (address.value == "" ) {
-              address.style.border = "1px solid red";
-           	  address.focus();
-           	  return false;
-    		
-}
-
-    	if (tel.value == "" ) {
-              tel.style.border = "1px solid red";
-           	  tel.focus();
-           	  return false;
-    		
-}
-return true;
-	}
-    function verifier_champ(){
-        var cinlog = document.forms["vf"]["cinlog"];
-        var pass = document.forms["vf"]["pass"];
-       
-
-            if (cinlog.value == "" ) {
-              cinlog.style.border = "1px solid red";
-              cinlog.focus();
-              return false;
-            
-}
-
-        if (pass.value == "" ) {
-              pass.style.border = "1px solid red";
-              pass.focus();
-              return false;
-            
-} 
-return true;
-    }
+        		if (pass.value == "" ) {
+              		pass.style.border = "1px solid red";
+              		pass.focus();
+              		return false;
+				} 
+				
+				return true;
+    		}
 		</script>
         <?php session_start(); ?>
 		<header>
@@ -334,15 +284,15 @@ return true;
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="inscription.php" method="POST" name="f" onsubmit="return verifier();">
+					<form action="inscription.php" method="POST" name="inscriptionForm" onsubmit="return verifyInscriptionForm();">
 						<div class="modal-body">
 							<div class="form-group">
 						    	<label>name : </label>
-						    	<input type="text" class="form-control" placeholder="your full name" name="name">
+						    	<input type="text" class="form-control" placeholder="your full name" name="firstName">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Last name : </label>
-						    	<input type="text" class="form-control" placeholder="your full name" name="lastname">
+						    	<input type="text" class="form-control" placeholder="your full name" name="lastName">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>CIN : </label>
@@ -354,7 +304,7 @@ return true;
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Birth date : </label>
-						    	<input type="date" class="form-control" placeholder="your birth date" name="datenaiss">
+						    	<input type="date" class="form-control" placeholder="your birth date" name="birthDate">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Address : </label>
@@ -382,7 +332,7 @@ return true;
 							<span aria-hidden="true">&times;</span>
 						</button>
 		   		   	</div>
-		   		   	<form action="inscription.php" method="POST" name="vf" onsubmit="return verifier_champ();">
+		   		   	<form action="inscription.php" method="POST" name="loginForm" onsubmit="return verifier_champ();">
 			   		   	<div class="modal-body">
 			   		   		<div class="form-group">
 						    	<label>CIN : </label>
