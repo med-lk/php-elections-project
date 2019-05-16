@@ -12,31 +12,20 @@
 	<body>
 		<script type="text/javascript">
 			const verifyInscriptionForm = () => {
-				let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["inscriptionForm"].elements;
-				let verified = true;
+				let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["inscriptionForm"].elements, 
+					verified = true;
 				[firstName, lastName, cin, password, birthDate, address, phone].forEach(input=>{
 					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
 				})
 				return verified;
 			}
     		
-			function verifier_champ(){
-        		var cinlog = document.forms["loginForm"]["cinlog"];
-        		var pass = document.forms["loginForm"]["pass"];
-
-	            if (cinlog.value == "" ) {
-    	          	cinlog.style.border = "1px solid red";
-              		cinlog.focus();
-              		return false;
-				}
-
-        		if (pass.value == "" ) {
-              		pass.style.border = "1px solid red";
-              		pass.focus();
-              		return false;
-				} 
-				
-				return true;
+			const verifyLogInForm = () => {
+        		let {cin, password} = document.forms["loginForm"].elements, verified = true;
+				[cin, password].forEach(input=>{
+					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
+				})
+				return verified;
     		}
 		</script>
         <?php session_start(); ?>
@@ -332,15 +321,15 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 		   		   	</div>
-		   		   	<form action="inscription.php" method="POST" name="loginForm" onsubmit="return verifier_champ();">
+		   		   	<form action="inscription.php" method="POST" name="loginForm" onsubmit="return verifyLogInForm();">
 			   		   	<div class="modal-body">
 			   		   		<div class="form-group">
 						    	<label>CIN : </label>
-						    	<input type="text" class="form-control" placeholder="Your CIN" name="cinlog">
+						    	<input type="text" class="form-control" placeholder="Your CIN" name="cin">
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Password : </label>
-						    	<input type="text" class="form-control" placeholder="Your Password" name="pass">
+						    	<input type="text" class="form-control" placeholder="Your Password" name="password">
 						  	</div>
 			   		   	</div>
 			   		   	<div class="modal-footer">
