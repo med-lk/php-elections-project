@@ -96,12 +96,10 @@
 	   		<section id="home" class="slide">
 		   		<div class="container">
 		   		   	<h1>Home Section</h1>
-                        <?php
-                         if (!isset($_SESSION["CIN"])) {
-                            
-                         ?>
-		   		   	<button class="btn btn-warning btn-lg login" class="button" data-toggle="modal" data-target="#Login">Login</button>
-                   <?php } ?>
+					
+					<?php if (!isset($_SESSION["CIN"])) {?>
+						<button class="btn btn-warning btn-lg login" class="button" data-toggle="modal" data-target="#Login">Login</button>
+					<?php } ?>
  
 			   		<div class="scrolling-keys" style="margin: 0px 0px 0px 200px;">
 				   		<a href="#about" class="btn btn-sm btn-outline-info">
@@ -305,7 +303,7 @@
 						  	</div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary" name="valideInscrit">Submit</button>
+							<button type="submit" class="btn btn-primary" name="submitInscription">Submit</button>
 						</div>
 					</form>
 				</div>
@@ -333,7 +331,7 @@
 						  	</div>
 			   		   	</div>
 			   		   	<div class="modal-footer">
-			   		   		<button type="submit" class="btn btn-primary" name="valideLogin">Enter</button>
+			   		   		<button type="submit" class="btn btn-primary" name="submitLogin">Enter</button>
 			   		   	</div>
 		   		   	</form>
 		   		</div>
