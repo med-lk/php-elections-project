@@ -10,7 +10,9 @@
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <link href='assets/css/rotating-card.css' rel='stylesheet' />
         <!---------------------------------------------------------------!-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <!----------------------------------------------------------------!-->
         <style type="text/css">
     td {
@@ -239,7 +241,192 @@
             <?php 
                     }   
                 } 
-            } else {header('location:index.php');}
+            } elseif (isset($_SESSION["admin"])) {
+              $cin = $_SESSION["admin"];
+                        include('connection.php');
+                        $checkCitoyenResult = mysqli_query($conn,"SELECT * FROM citoyen where cin ='$cin'");
+                        // this is not a condition, this is an affectation
+                        if ($res = mysqli_fetch_assoc($checkCitoyenResult)){
+                            ?>
+                                <!-- hadik katjib liya les données li bghina ndiro lihom Modify  -->
+                            <?php  
+                            $checkInscriptionsResult = mysqli_query($conn,"SELECT * FROM inscrit where cin ='$cin'");
+                            if ($row = mysqli_fetch_assoc($checkInscriptionsResult)){
+                                ?>
+                <div class="col-sm-2 sidenav">
+                    <img class="img-circle" src="<?php echo$res["image"]; ?>" width="200" height="200" />
+                </div>
+                <div class="col-sm-8 text-left"> 
+                    <form action="" method="POST">
+                    <table class="table" style="margin-top:30px; " >
+                        <tbody> 
+                            <tr>
+                                <th>CIN</th>
+                                <td><?= $row["cin"] ?></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td><?= $row["Nom"] ?></td>
+                                <td><button type="button" data-toggle="modal" data-target="#Nom" class="btn btn-light btn-sm">Modify</button>
+
+                                </td>
+
+                                <div  class="modal fade" id="Nom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="form-group">
+                                    <div class="modal-header">
+                                     <h5 class="modal-title" id="exampleModalLongTitle">Modifier</h5>
+                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                     </button>
+                                     </div>
+                                     <div class="modal-body">
+                                        <label>name : </label><input type="text" class="form-control" placeholder="your full name" name="Nom" value="<?= $row["Nom"] ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" name="Modify">Modifier</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                            </tr>
+                            <tr>
+                                <th>Last Name</th>
+                                <td><?= $row["prenom"] ?></td>
+                                <td><button type="button" data-toggle="modal" data-target="#prenom" class="btn btn-light btn-sm">Modify</button></td>
+                                <div  class="modal fade" id="prenom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="form-group">
+                                    <div class="modal-header">
+                                     <h5 class="modal-title" id="exampleModalLongTitle">Modifier</h5>
+                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                     </button>
+                                     </div>
+                                     <div class="modal-body">
+                                        <label>Last Name : </label><input type="text" class="form-control" placeholder="your full name" name="prenom" value="<?= $row["prenom"] ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" name="Modify">Modifier</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                            </tr>
+                            <tr>
+                                <th>Adresse</th>
+                                <td><?= $row["adresse"] ?></td>
+                                <td><button type="button" data-toggle="modal" data-target="#adresse" class="btn btn-light btn-sm">Modify</button></td>
+                                <div  class="modal fade" id="adresse" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="form-group">
+                                    <div class="modal-header">
+                                     <h5 class="modal-title" id="exampleModalLongTitle">Modifier</h5>
+                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                     </button>
+                                     </div>
+                                     <div class="modal-body">
+                                        <label>Adresse : </label><input type="text" class="form-control" placeholder="your full name" name="adresse" value="<?= $row["adresse"] ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" name="Modify">Modifier</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                            </tr>
+                            <tr>
+                                <th>Phone</th>
+                                <td><?= $row["tele"] ?></td>
+                                <td><button type="button" data-toggle="modal" data-target="#tele" class="btn btn-light btn-sm">Modify</button></td>
+                                <div  class="modal fade" id="tele" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="form-group">
+                                    <div class="modal-header">
+                                     <h5 class="modal-title" id="exampleModalLongTitle">Modifier</h5>
+                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                     </button>
+                                     </div>
+                                     <div class="modal-body">
+                                        <label>Phone : </label><input type="text" class="form-control" placeholder="your full name" name="tele" value="<?= $row["tele"] ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" name="Modify">Modifier</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                            </tr>
+                            <tr>
+                                <th>PassWord</th>
+                                <td>***********</td>
+                                <td><button type="button" data-toggle="modal" data-target="#PassWord" class="btn btn-light btn-sm">Modify</button></td>
+                                <div  class="modal fade" id="PassWord" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="form-group">
+                                    <div class="modal-header">
+                                     <h5 class="modal-title" id="exampleModalLongTitle">Modifier</h5>
+                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                     </button>
+                                     </div>
+                                     <div class="modal-body">
+                                        <label>PassWord : </label><input type="password" class="form-control" placeholder="your PassWord" name="password" value="<?= $row["password"] ?>">
+                                        <label>Re-PassWord : </label><input type="password" class="form-control" placeholder="your PassWord" name="re_password" value="<?= $row["password"] ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" name="Modify">Modifier</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                            </tr>
+                            <tr>
+                                <th>Birth Date</th>
+                                <td><?= $row["datnaiss"] ?></td>
+                                <td><button type="button" data-toggle="modal" data-target="#datnaiss" class="btn btn-light btn-sm">Modify</button></td>
+                                <div  class="modal fade" id="datnaiss" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="form-group">
+                                    <div class="modal-header">
+                                     <h5 class="modal-title" id="exampleModalLongTitle">Modifier</h5>
+                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                     </button>
+                                     </div>
+                                     <div class="modal-body">
+                                        <label>Birth Date : </label><input type="Date" class="form-control" placeholder="your full name" name="datnaiss" value="<?= $row["datnaiss"] ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" name="Modify">Modifier</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </form>
+                    </div>
+            <?php 
+                    }   
+                } 
+            } else{header('location:index.php');}
 
             if (isset($_POST["Modify"])) {
                 
@@ -264,15 +451,57 @@
                 
                
                     <div class="col-sm-12 sidenav">
-                        <div class="front" style="margin: 0px 0px 0px 0px; background-color:   #d3d3d5; box-shadow: 0 0px 35px 0 rgba(0, 0, 0, 0.60);">
-                            
+                        
+                            <?php
+                            $res = mysqli_query($conn,"SELECT * FROM inscrit where idpartie <> '0'");
+                            $total_vote = mysqli_num_rows($res);
+                            echo "<div class='alert alert-info alert-dismissible fade show' role='alert' align='center'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Le Nombre des Citoyens qui Sont Votés : </strong>$total_vote</div>";?>
+                                
+                            <?php
+                            if (isset($_SESSION["CIN"])) {
+                                $res = mysqli_query($conn,"SELECT count(i.idpartie) as nb_vote, i.idpartie, p.full_name, p.partie_image,p.leader_name from inscrit AS i, partie as p where i.idpartie=p.idpartie and  i.idpartie<>'0' group by idpartie ORDER BY nb_vote DESC");
+                                if ($row = mysqli_fetch_assoc($res)) {
+                                    $nb_vote = $row["nb_vote"]; ?>
+                                    <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                     <div class="row content">
+                                        <div class="col-sm-4">
+                                            
+                                            <img width="150" src="<?= $row["partie_image"] ?>" alt="Bootstrap" class="img-rounded">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h2> party : <?= $row["full_name"] ?></h2>
+                                            <h3>Chef : <?= $row["idpartie"] ?></h3>
+                                            <h3>Nombre de votes : <?= $nb_vote ?></h3>
+                                        </div>
+                                     </div>
+                                 </div>
+                                <?php while ($row1 = mysqli_fetch_assoc($res)) {
+                                    $nb = $row1["nb_vote"];
+                                    if ($nb_vote == $nb) {?>
+                                        <div class='alert alert-success alert-dismissible fade show' role='alert' align='center'>
+                                        <div class="row content">
+                                        <div class="col-sm-4 sidenav">
+                                            <img width="150" src="<?= $row1["partie_image"] ?>" alt="Bootstrap" class="img-rounded">
+                                        </div>
+                                        <div class="col-sm-6 sidenav">
+                                            <h2> party : <?= $row1["full_name"] ?></h2>
+                                            <h3>Chef : <?= $row1["idpartie"] ?></h3>
+                                            <h3>Nombre de votes : <?= $nb ?></h3>
+                                        </div>
+                                     </div>
+                                 </div>
+                                  <?php  }
+                                } } ?>
+                                </div>
 
-                        </div>
+                           <?php  }
+                            ?>
+                        
                     </div>
                 </div>
             </div>
         <footer class="container-fluid text-center">
-            <p>Footer Text</p>
+            
         </footer>
         <script type="text/javascript" src="assets/js/app.js"></script>
         <script type="text/javascript" src="assets/js/jquery.js"></script>

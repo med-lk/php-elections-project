@@ -2,18 +2,29 @@
 <html>
     <head>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-        <title>Parties</title>
+        <title>Party</title>
         <meta charset="utf-16">
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-6" />
         <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link href='assets/css/rotating-card.css' rel='stylesheet' />
         <link rel="stylesheetَ" type="text/css" href="assets/css/style.css">
+
+<script type="text/javascript">
+            const verifyInscriptionForm = () => {
+                let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["Form"].elements, 
+                    verified = true;
+                [firstName, lastName, cin, password, birthDate, address, phone].forEach(input=>{
+                    if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
+                })
+                return verified;
+            }
+</script>
     </head>
     <body>
         <header>
             <nav class="navbar fixed-top navbar-expand navbar-light bg-light">
-                <a class="navbar-brand logo" href="index.html#home">
+                <a class="navbar-brand logo" href="index.php">
                     <img src="assets/img/logo.PNG">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,13 +40,8 @@
                             
                          ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html#home">
+                            <a class="nav-link" href="index.php">
                                 <ion-icon name="home"></ion-icon> Home
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="partiesList.html">
-                                <ion-icon name="people"></ion-icon> Parties
                             </a>
                         </li>
                         <li class="nav-item">
@@ -70,8 +76,8 @@
                 </div>
             </nav>
         </header>
-    <!-- Modal -->
-        <div  class="modal fade" id="SignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal -->
+<div  class="modal fade" id="SignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -80,48 +86,47 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form>
+                    <form action="inscription.php" method="POST" name="inscriptionForm" onsubmit="return verifyInscriptionForm();">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Full name : </label>
-                                <input type="text" class="form-control" placeholder="your full name">
+                                <label>name : </label>
+                                <input type="text" class="form-control" placeholder="your full name" name="firstName">
+                            </div>
+                            <div class="form-group">
+                                <label>Last name : </label>
+                                <input type="text" class="form-control" placeholder="your full name" name="lastName">
                             </div>
                             <div class="form-group">
                                 <label>CIN : </label>
-                                <input type="text" class="form-control" placeholder="your cin">
+                                <input type="text" class="form-control" placeholder="your cin" name="cin">
                             </div>
                             <div class="form-group">
                                 <label>Password : </label>
-                                <input type="password" class="form-control" placeholder="your password">
-                            </div>
-                            <div class="form-group">
-                                <label>Re-Password : </label>
-                                <input type="password" class="form-control" placeholder="repeat your password">
+                                <input type="password" class="form-control" placeholder="your password" name="password">
                             </div>
                             <div class="form-group">
                                 <label>Birth date : </label>
-                                <input type="date" class="form-control" placeholder="your birth date">
+                                <input type="date" class="form-control" placeholder="your birth date" name="birthDate">
                             </div>
                             <div class="form-group">
                                 <label>Address : </label>
-                                <input type="text" class="form-control" placeholder="your adresse">
+                                <input type="text" class="form-control" placeholder="your adresse" name="address">
                             </div>
                             <div class="form-group">
                                 <label>Phone : </label>
-                                <input type="text" class="form-control" placeholder="your phone number">
+                                <input type="text" class="form-control" placeholder="your phone number" name="phone">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" name="submitInscription">Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div>
         <div class="card" style="margin-top: 140px; margin-left: 200px; width: 70rem;">
             <div class="card-header title text-center">
-                <h1>Parties :</h1>
+                <h1>Party :</h1>
             </div>
  <div class="card-body row" style="margin-top: 20px;">
 <?php 

@@ -1,3 +1,5 @@
+<?php include('connection.php');
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,7 +33,7 @@
         <?php session_start(); ?>
 		<header>
 	   		<nav class="navbar fixed-top navbar-expand navbar-light bg-light">
-	   			<a class="navbar-brand logo" href="#home">
+	   			<a class="navbar-brand logo" href="index.php">
 	   				<img src="assets/img/logo.PNG">
 	   			</a>
 		      	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +43,7 @@
 		      	<div class="collapse navbar-collapse" id="navbarsExample02">
 		        	<ul class="navbar-nav mr-auto"></ul>
 		        	<ul class="navbar-nav float-right">
+		        		<?php   if (!isset($_SESSION["admin"])) { ?>
 		        		<li class="nav-item">
 		   					<a class="nav-link" href="#home">
 		   						<ion-icon name="home"></ion-icon> Home
@@ -67,22 +70,31 @@
 			   				</a>
 			   			</li>
                         <?php
-                        
-                         if (!isset($_SESSION["CIN"])) {
+                        }
+                         if (isset($_SESSION["CIN"])) {
                             
                          ?>
-			   			<li class="nav-item">
-			   				<a class="nav-link btn btn-outline-info" href="#" data-toggle="modal" data-target="#SignUp">
-			   					<ion-icon name="person-add"></ion-icon> <strong>Sign up</strong>
-			   				</a>
-			   			</li>
-                        <?php }else{ ?>
+                         <li class="nav-item">
+                            <a class="nav-link btn btn-outline-info" href="user.php">
+                                <img src="assets/img/download.png" width="30" height="30">
+                            </a>
+                        </li>
+			   			
+                        <?php }elseif(isset($_SESSION["admin"])) {
+                         ?>
                         <li class="nav-item">
                             <a class="nav-link btn btn-outline-info" href="user.php">
                                 <img src="assets/img/download.png" width="30" height="30">
                             </a>
                         </li>
-                    <?php } ?>
+                    <?php }else{ ?>
+                    	<li class="nav-item">
+			   				<a class="nav-link btn btn-outline-info" href="#" data-toggle="modal" data-target="#SignUp">
+			   					<ion-icon name="person-add"></ion-icon> <strong>Sign up</strong>
+			   				</a>
+			   			</li>
+                    	<?php
+                    } ?>
 			        </ul>
 		      	</div>
 		    </nav>
@@ -97,9 +109,24 @@
 		   		<div class="container">
 		   		   	<h1>Home Section</h1>
 					
-					<?php if (!isset($_SESSION["CIN"])) {?>
+					<?php if (!isset($_SESSION["CIN"]) && !isset($_SESSION["admin"])) {?>
 						<button class="btn btn-warning btn-lg login" class="button" data-toggle="modal" data-target="#Login">Login</button>
+					<?php }elseif (isset($_SESSION["admin"])) { 
+						$res = mysqli_query($conn,"SELECT * FROM appartenir");
+		                if(mysqli_num_rows($res) == 0) {
+						?>
+						<a href="resultelections.php">
+						<button class="btn btn-warning btn-lg login" class="button" data-toggle="modal" data-target="#Login">Result</button></a>
+					<?php }else{ ?>
+				<div class="alert alert-info alert-dismissible fade show" role="alert" align="center"> 
+		          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		           <span aria-hidden="true">&times;</span>
+		           </button>
+		           <strong>Les Elections Terminé</strong>
+               </div>
 					<?php } ?>
+
+				<?php } ?>
  
 			   		<div class="scrolling-keys" style="margin: 0px 0px 0px 200px;">
 				   		<a href="#about" class="btn btn-sm btn-outline-info">
@@ -108,6 +135,7 @@
 			   		</div>
 			   	</div>
 	   		</section>
+	   		<?php   if (!isset($_SESSION["admin"])) { ?>
 	   		<section id="about" class="slide">
 		   		<div class="container">
 		   		   	<h1>About Section</h1>
@@ -260,6 +288,7 @@
                     </div>
                 </div>
             </section>
+        <?php } ?>
         </div>
 	   	<!-- Modal -->
 		<div  class="modal fade" id="SignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -327,7 +356,7 @@
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Password : </label>
-						    	<input type="text" class="form-control" placeholder="Your Password" name="password">
+						    	<input type="password" class="form-control" placeholder="Your Password" name="password">
 						  	</div>
 			   		   	</div>
 			   		   	<div class="modal-footer">

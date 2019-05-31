@@ -26,7 +26,14 @@
 		$cin = $_POST["cin"];
 		$password = $_POST["password"];
 		$checkInscriptionsResult = mysqli_query($conn,"SELECT * FROM inscrit where cin ='$cin' and password='$password'");
-		if ($checkInscriptionsResult->num_rows == 1) {$_SESSION["CIN"] = $cin; header('location:user.php');}
+		if ($row = mysqli_fetch_assoc($checkInscriptionsResult)) {
+			$role = $row["role"];
+			if ($role == 1) {
+			  $_SESSION["CIN"] = $cin; header('location:user.php');
+			}elseif ($role == 2) {
+				 $_SESSION["admin"] = $cin; header('location:user.php');
+			}
+			}
 		else{echo "<script>alert('ERROR SUR CIN OU LE MOT DE PASS')</script>";}
 	}
 ?>
