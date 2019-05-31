@@ -11,12 +11,29 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			const verifyInscriptionForm = () => {
+			const verifyExistence = (cin) => {
+				let xml = new XMLHttpRequest();
+				xml.open('POST', 'api/verifyExistenceService.php', true);
+				xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				xml.send(`cin=${cin}&action=testing`);
+				xml.onreadystatechange = () => {
+					if (xml.readyState == 4 && xml.status == 200) {
+						// Swal.fire({
+						//   text: xml.responseText,
+						//   type: 'info',
+						// });
+						console.log(xml.responseText);
+					}
+				}
+			}
+			const verifyInscriptionForm = (event) => {
+				event.preventDefault();
 				let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["inscriptionForm"].elements, 
 					verified = true;
 				[firstName, lastName, cin, password, birthDate, address, phone].forEach(input=>{
 					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
 				})
+				if(!verified){verifyExistence(cin.value);}
 				return verified;
 			}
     		
@@ -344,5 +361,6 @@
 	   	<script type="text/javascript" src="assets/js/popper.js"></script>
 	   	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	   	<script src="https://unpkg.com/ionicons@4.5.1/dist/ionicons.js"></script>
+	   	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	</body>
 </html>
