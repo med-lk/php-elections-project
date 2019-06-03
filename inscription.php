@@ -1,7 +1,8 @@
 <?php
+	var_dump($_POST);
 	include('connection.php');
 	session_start();
-	if (isset($_POST["submitInscription"])) {
+	if (isset($_POST["firstName"])) {
 		$firstName = $_POST["firstName"];
 		$lastName = $_POST["lastName"];
 		$cin = $_POST["cin"];
@@ -22,7 +23,7 @@
 		}else{echo "<script>alert('Ce Citoyen est deja inscrit')</script>";}
 	}	
 
-	if (isset($_POST["submitLogin"])) {
+	if (!isset($_POST["firstName"])) {
 		$cin = $_POST["cin"];
 		$password = $_POST["password"];
 		$checkInscriptionsResult = mysqli_query($conn,"SELECT * FROM inscrit where cin ='$cin' and password='$password'");

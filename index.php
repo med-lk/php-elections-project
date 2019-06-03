@@ -10,41 +10,6 @@
         <link href='assets/css/rotating-card.css' rel='stylesheet' />
 	</head>
 	<body>
-		<script type="text/javascript">
-			const verifyExistence = (cin) => {
-				let xml = new XMLHttpRequest();
-				xml.open('POST', 'api/verifyExistenceService.php', true);
-				xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				xml.send(`cin=${cin}&action=testing`);
-				xml.onreadystatechange = () => {
-					if (xml.readyState == 4 && xml.status == 200) {
-						// Swal.fire({
-						//   text: xml.responseText,
-						//   type: 'info',
-						// });
-						console.log(xml.responseText);
-					}
-				}
-			}
-			const verifyInscriptionForm = (event) => {
-				event.preventDefault();
-				let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["inscriptionForm"].elements, 
-					verified = true;
-				[firstName, lastName, cin, password, birthDate, address, phone].forEach(input=>{
-					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
-				})
-				if(!verified){verifyExistence(cin.value);}
-				return verified;
-			}
-    		
-			const verifyLogInForm = () => {
-        		let {cin, password} = document.forms["loginForm"].elements, verified = true;
-				[cin, password].forEach(input=>{
-					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
-				})
-				return verified;
-    		}
-		</script>
         <?php session_start(); ?>
 		<header>
 	   		<nav class="navbar fixed-top navbar-expand navbar-light bg-light">
@@ -288,7 +253,8 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="inscription.php" method="POST" name="inscriptionForm" onsubmit="return verifyInscriptionForm();">
+					<!-- <form action="inscription.php" method="POST" name="inscriptionForm" onsubmit="return verifyInscriptionForm();"> -->
+					<form action="inscription.php" method="POST" name="inscriptionForm">
 						<div class="modal-body">
 							<div class="form-group">
 						    	<label>name : </label>
@@ -355,7 +321,56 @@
 		   	</div>
 		</div>
 
+		<script type="text/javascript">
+			document.getElementsByName('inscriptionForm')[0].addEventListener('submit', async (event) => {
+				event.preventDefault();
+				if (await verifyInscriptionForm() == true){setTimeout(() => {event.target.submit();}, 2000);}
+				else {event.target.reset();}
+			})
 
+			function sleep(milliseconds) {
+				let start = new Date().getTime();
+				for (let i = 0; i < 1e7; i++) {if ((new Date().getTime() - start) > milliseconds){break;}}
+			}
+
+			const verifyExistence = (cin) => {
+				return new Promise((resolve, reject) => {
+					let xml = new XMLHttpRequest();
+					xml.open('POST', 'api/verifyExistenceService.php', true);
+					xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					xml.send(`cin=${cin}&action=testing`);
+					xml.onreadystatechange = () => {
+						if (xml.readyState == 4 && xml.status == 200) {
+							response = xml.responseText.split(';')
+							Swal.fire({
+								text: response[0].split(":")[1],
+								type: response[1].split(":")[1]
+							});
+							if(response[1].split(":")[1] == "success") {console.log('here is true'); resolve(true);}
+							else {console.log('here is true'); resolve(false);}
+						}
+					}
+				});
+			}
+
+			const verifyInscriptionForm = async () => {
+				let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["inscriptionForm"].elements, 
+					verified = true;
+				[firstName, lastName, cin, password, birthDate, address, phone].forEach(input=>{
+					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
+				})
+				if(verified){ verified = await verifyExistence(cin.value);}
+				return verified;
+			}
+    		
+			const verifyLogInForm = () => {
+        		let {cin, password} = document.forms["loginForm"].elements, verified = true;
+				[cin, password].forEach(input=>{
+					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
+				})
+				return verified;
+    		}
+		</script>
 	   	<script type="text/javascript" src="assets/js/app.js"></script>
 	   	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	   	<script type="text/javascript" src="assets/js/popper.js"></script>
