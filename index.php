@@ -302,7 +302,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 		   		   	</div>
-		   		   	<form action="inscription.php" method="POST" name="loginForm" onsubmit="return verifyLogInForm();">
+		   		   	<form action="inscription.php" method="POST" name="loginForm">
 			   		   	<div class="modal-body">
 			   		   		<div class="form-group">
 						    	<label>CIN : </label>
@@ -310,7 +310,7 @@
 						  	</div>
 						  	<div class="form-group">
 						    	<label>Password : </label>
-						    	<input type="text" class="form-control" placeholder="Your Password" name="password">
+						    	<input type="password" class="form-control" placeholder="Your Password" name="password">
 						  	</div>
 			   		   	</div>
 			   		   	<div class="modal-footer">
@@ -328,17 +328,23 @@
 				else {event.target.reset();}
 			})
 
+			document.getElementsByName('loginForm')[0].addEventListener('submit', async (event) => {
+				event.preventDefault();
+				if (await verifyLogInForm() == true){setTimeout(() => {event.target.submit();}, 2000);}
+				else {event.target.reset();}
+			})
+
 			function sleep(milliseconds) {
 				let start = new Date().getTime();
 				for (let i = 0; i < 1e7; i++) {if ((new Date().getTime() - start) > milliseconds){break;}}
 			}
 
-			const verifyExistence = (cin) => {
+			const verifyExistence = (cin, signAction) => {
 				return new Promise((resolve, reject) => {
 					let xml = new XMLHttpRequest();
 					xml.open('POST', 'api/verifyExistenceService.php', true);
 					xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-					xml.send(`cin=${cin}&action=testing`);
+					xml.send(`cin=${cin}&action=${signAction}`);
 					xml.onreadystatechange = () => {
 						if (xml.readyState == 4 && xml.status == 200) {
 							response = xml.responseText.split(';')
@@ -359,15 +365,16 @@
 				[firstName, lastName, cin, password, birthDate, address, phone].forEach(input=>{
 					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
 				})
-				if(verified){ verified = await verifyExistence(cin.value);}
+				if(verified){ verified = await verifyExistence(cin.value, 'signup');}
 				return verified;
 			}
     		
-			const verifyLogInForm = () => {
+			const verifyLogInForm = async () => {
         		let {cin, password} = document.forms["loginForm"].elements, verified = true;
 				[cin, password].forEach(input=>{
 					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
 				})
+				if(verified){ verified = await verifyExistence(cin.value, 'signin');}
 				return verified;
     		}
 		</script>
