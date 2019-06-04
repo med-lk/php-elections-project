@@ -451,42 +451,55 @@
                 
                
                     <div class="col-sm-12 sidenav">
-                        
+                        <br><br>
+                        <div>
+                   <h3>Details Elections</h3><br><br>
+               </div>
                             <?php
+                            $res = mysqli_query($conn,"SELECT * FROM appartenir");
+                            if (mysqli_num_rows($res) <> 0) {
                             $res = mysqli_query($conn,"SELECT * FROM inscrit where idpartie <> '0'");
                             $total_vote = mysqli_num_rows($res);
                             echo "<div class='alert alert-info alert-dismissible fade show' role='alert' align='center'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Le Nombre des Citoyens qui Sont Votés : </strong>$total_vote</div>";?>
                                 
                             <?php
+
                             if (isset($_SESSION["CIN"])) {
                                 $res = mysqli_query($conn,"SELECT count(i.idpartie) as nb_vote, i.idpartie, p.full_name, p.partie_image,p.leader_name from inscrit AS i, partie as p where i.idpartie=p.idpartie and  i.idpartie<>'0' group by idpartie ORDER BY nb_vote DESC");
                                 if ($row = mysqli_fetch_assoc($res)) {
-                                    $nb_vote = $row["nb_vote"]; ?>
+                                    $nb_vote = $row["nb_vote"];
+                                    $idpartie = $row["idpartie"];
+                                    $nb_place = nb_place($idpartie);
+                                      ?>
                                     <div class='alert alert-success alert-dismissible fade show' role='alert'>
                                      <div class="row content">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2 sidenav">
                                             
-                                            <img width="150" src="<?= $row["partie_image"] ?>" alt="Bootstrap" class="img-rounded">
+                                            <img width="155" src="<?= $row["partie_image"] ?>" alt="Bootstrap" class="img-rounded">
                                         </div>
-                                        <div class="col-sm-6">
-                                            <h2> party : <?= $row["full_name"] ?></h2>
-                                            <h3>Chef : <?= $row["idpartie"] ?></h3>
-                                            <h3>Nombre de votes : <?= $nb_vote ?></h3>
+                                        <div class="col-sm-10 sidenav" >
+                                            <h4 class="list-group-item list-group-item-action list-group-item-light"> party : <?= $row["full_name"] ?></h4>
+                                            <h5 class="list-group-item list-group-item-action list-group-item-light">Chef : <?= $row["leader_name"] ?></h5>
+                                            <h5 class="list-group-item list-group-item-action list-group-item-light">Nombre de votes : <?= $nb_vote ?></h5>
+                                            <h5 class="list-group-item list-group-item-action list-group-item-light">Nombre de votes : <?= $nb_place ?></h5>
                                         </div>
                                      </div>
                                  </div>
                                 <?php while ($row1 = mysqli_fetch_assoc($res)) {
                                     $nb = $row1["nb_vote"];
-                                    if ($nb_vote == $nb) {?>
+                                    if ($nb_vote == $nb) { 
+                                        $idpartie = $row1["idpartie"];
+                                        $nb_place = nb_place($idpartie);?>
                                         <div class='alert alert-success alert-dismissible fade show' role='alert' align='center'>
                                         <div class="row content">
-                                        <div class="col-sm-4 sidenav">
-                                            <img width="150" src="<?= $row1["partie_image"] ?>" alt="Bootstrap" class="img-rounded">
+                                        <div class="col-sm-2 sidenav">
+                                            <img width="155" src="<?= $row1["partie_image"] ?>" alt="Bootstrap" class="img-rounded">
                                         </div>
-                                        <div class="col-sm-6 sidenav">
-                                            <h2> party : <?= $row1["full_name"] ?></h2>
-                                            <h3>Chef : <?= $row1["idpartie"] ?></h3>
-                                            <h3>Nombre de votes : <?= $nb ?></h3>
+                                        <div class="col-sm-10 sidenav">
+                                            <h4 class="list-group-item list-group-item-action list-group-item-light"> party : <?= $row1["full_name"] ?></h4>
+                                            <h5 class="list-group-item list-group-item-action list-group-item-light">Chef : <?= $row1["leader_name"] ?></h5>
+                                            <h5 class="list-group-item list-group-item-action list-group-item-light">Nombre de votes : <?= $nb ?></h5>
+                                            <h5 class="list-group-item list-group-item-action list-group-item-light">Nombre de votes : <?= $nb_place ?></h5>
                                         </div>
                                      </div>
                                  </div>
@@ -494,7 +507,10 @@
                                 } } ?>
                                 </div>
 
-                           <?php  }
+                           <?php  }}else{?>
+                            <div class='alert alert-info alert-dismissible fade show' role='alert' align='center'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Les Élections Pas en cours Terminé</strong></div>
+                           <?php }
+
                             ?>
                         
                     </div>
@@ -510,3 +526,13 @@
         <script src="https://unpkg.com/ionicons@4.5.1/dist/ionicons.js"></script>
     </body>
 </html>
+<?php
+    function nb_place($idpartie){
+        include('connection.php');
+        $res1 = mysqli_query($conn,"SELECT SUM(nb_place_party) as nb_place FROM appartenir where idpartie='$idpartie'");
+        if ($row2 = mysqli_fetch_assoc($res1)) {
+           $nb_place = $row2["nb_place"];
+        }
+        return $nb_place;
+    }
+?>

@@ -12,24 +12,7 @@
         <link href='assets/css/rotating-card.css' rel='stylesheet' />
 	</head>
 	<body>
-		<script type="text/javascript">
-			const verifyInscriptionForm = () => {
-				let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["inscriptionForm"].elements, 
-					verified = true;
-				[firstName, lastName, cin, password, birthDate, address, phone].forEach(input=>{
-					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
-				})
-				return verified;
-			}
-    		
-			const verifyLogInForm = () => {
-        		let {cin, password} = document.forms["loginForm"].elements, verified = true;
-				[cin, password].forEach(input=>{
-					if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
-				})
-				return verified;
-    		}
-		</script>
+
         <?php session_start(); ?>
 		<header>
 	   		<nav class="navbar fixed-top navbar-expand navbar-light bg-light">
@@ -51,7 +34,7 @@
 			   			</li>
 			   			<li class="nav-item">
 		   					<a class="nav-link" href="partiesList.php">
-		   						<ion-icon name="people"></ion-icon> Parties
+		   						<ion-icon name="people"></ion-icon> Partis
 		   					</a>
 			   			</li>
 			   			<li class="nav-item">
@@ -300,7 +283,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="inscription.php" method="POST" name="inscriptionForm" onsubmit="return verifyInscriptionForm();">
+					<form action="inscription.php" method="POST" name="inscriptionForm">
 						<div class="modal-body">
 							<div class="form-group">
 						    	<label>name : </label>
@@ -348,7 +331,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 		   		   	</div>
-		   		   	<form action="inscription.php" method="POST" name="loginForm" onsubmit="return verifyLogInForm();">
+		   		   	<form action="inscription.php" method="POST" name="loginForm">
 			   		   	<div class="modal-body">
 			   		   		<div class="form-group">
 						    	<label>CIN : </label>
@@ -366,12 +349,69 @@
 		   		</div>
 		   	</div>
 		</div>
+        <script type="text/javascript">
+            document.getElementsByName('inscriptionForm')[0].addEventListener('submit', async (event) => {
+                event.preventDefault();
+                if (await verifyInscriptionForm() == true){setTimeout(() => {event.target.submit();}, 2000);}
+                else {event.target.reset();}
+            })
 
+            document.getElementsByName('loginForm')[0].addEventListener('submit', async (event) => {
+                event.preventDefault();
+                if (await verifyLogInForm() == true){setTimeout(() => {event.target.submit();}, 2000);}
+                else {event.target.reset();}
+            })
+
+            function sleep(milliseconds) {
+                let start = new Date().getTime();
+                for (let i = 0; i < 1e7; i++) {if ((new Date().getTime() - start) > milliseconds){break;}}
+            }
+
+            const verifyExistence = (cin, signAction) => {
+                return new Promise((resolve, reject) => {
+                    let xml = new XMLHttpRequest();
+                    xml.open('POST', 'api/verifyExistenceService.php', true);
+                    xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xml.send(`cin=${cin}&action=${signAction}`);
+                    xml.onreadystatechange = () => {
+                        if (xml.readyState == 4 && xml.status == 200) {
+                            response = xml.responseText.split(';')
+                            Swal.fire({
+                                text: response[0].split(":")[1],
+                                type: response[1].split(":")[1]
+                            });
+                            if(response[1].split(":")[1] == "success") {console.log('here is true'); resolve(true);}
+                            else {console.log('here is true'); resolve(false);}
+                        }
+                    }
+                });
+            }
+
+            const verifyInscriptionForm = async () => {
+                let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["inscriptionForm"].elements, 
+                    verified = true;
+                [firstName, lastName, cin, password, birthDate, address, phone].forEach(input=>{
+                    if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
+                })
+                if(verified){ verified = await verifyExistence(cin.value, 'signup');}
+                return verified;
+            }
+            
+            const verifyLogInForm = async () => {
+                let {cin, password} = document.forms["loginForm"].elements, verified = true;
+                [cin, password].forEach(input=>{
+                    if(input.value == "") {input.style.border = "1px solid red"; input.focus(); verified = false;}
+                })
+                if(verified){ verified = await verifyExistence(cin.value, 'signin');}
+                return verified;
+            }
+        </script>
 
 	   	<script type="text/javascript" src="assets/js/app.js"></script>
 	   	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	   	<script type="text/javascript" src="assets/js/popper.js"></script>
 	   	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	   	<script src="https://unpkg.com/ionicons@4.5.1/dist/ionicons.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	</body>
 </html>

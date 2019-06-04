@@ -159,17 +159,17 @@ while ($row = mysqli_fetch_assoc($res)) {  ?>
                             </div><!-- end front panel --> 
                             <div class="back">
                                 <div class="header">
-                                    <h5 class="motto">"Président Du Jarti Justice Et Développement"</h5>
+                                    <h5 class="motto">"LEADER OF PARTY"</h5>
                                 </div>
                                 <div class="content">
                                     <div class="main">
                                         <h4 class="text-center">Réformes Proposées</h4>
-                                        <p class="text-center">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
+                                        <p class="text-center">FUNCTIONS</p>
                                         <div class="stats-container"></div>
                                     </div>
                                 </div>
                                 <div align="center">
-                                <a href="details.php?idp=<?php echo$row["idpartie"]?>"><button class="btn btn-primary btn-outline-info" > Parties</button></a>
+                                <a href="details.php?idp=<?php echo$row["idpartie"]?>"><button class="btn btn-primary btn-outline-info" >Parti</button></a>
                                 </div>
                                 <div class="footer">
                                     <div class="social-links text-center">
