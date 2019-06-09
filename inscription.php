@@ -1,4 +1,5 @@
 <?php
+	var_dump($_POST);
 	include('connection.php');
 	session_start();
 	if (isset($_POST["firstName"])) {

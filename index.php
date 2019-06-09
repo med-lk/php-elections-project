@@ -12,7 +12,6 @@
         <link href='assets/css/rotating-card.css' rel='stylesheet' />
 	</head>
 	<body>
-
         <?php session_start(); ?>
 		<header>
 	   		<nav class="navbar fixed-top navbar-expand navbar-light bg-light">
@@ -283,6 +282,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
+					<!-- <form action="inscription.php" method="POST" name="inscriptionForm" onsubmit="return verifyInscriptionForm();"> -->
 					<form action="inscription.php" method="POST" name="inscriptionForm">
 						<div class="modal-body">
 							<div class="form-group">
@@ -386,7 +386,6 @@
                     }
                 });
             }
-
             const verifyInscriptionForm = async () => {
                 let {firstName, lastName, cin, password, birthDate, address, phone} = document.forms["inscriptionForm"].elements, 
                     verified = true;
@@ -406,12 +405,11 @@
                 return verified;
             }
         </script>
-
 	   	<script type="text/javascript" src="assets/js/app.js"></script>
 	   	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	   	<script type="text/javascript" src="assets/js/popper.js"></script>
 	   	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	   	<script src="https://unpkg.com/ionicons@4.5.1/dist/ionicons.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	   	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	</body>
 </html>
