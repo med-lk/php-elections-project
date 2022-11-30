@@ -55,6 +55,7 @@ if (mysqli_num_rows($res) <> 0) {
 <?php 
 
 $res = mysqli_query($conn,"SELECT * from partie");
+echo"test"
 
 while ($row = mysqli_fetch_assoc($res)) {  ?>
         		<dir class="col-md-4">
