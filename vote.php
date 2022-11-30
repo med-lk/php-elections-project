@@ -42,8 +42,6 @@
     </header>
 <?php
 include('connection.php');
-echo"La connexion a ete etablie"
-
 session_start();
 $id_user = $_SESSION["CIN"];
 $res = mysqli_query($conn,"SELECT * FROM inscrit WHERE cin = '$id_user' and idpartie='0'");
@@ -55,7 +53,6 @@ if (mysqli_num_rows($res) <> 0) {
 <?php 
 
 $res = mysqli_query($conn,"SELECT * from partie");
-echo"test"
 
 while ($row = mysqli_fetch_assoc($res)) {  ?>
         		<dir class="col-md-4">
