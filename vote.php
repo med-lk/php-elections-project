@@ -42,8 +42,6 @@
     </header>
 <?php
 include('connection.php');
-echo"La connexion a ete etablie"
-
 session_start();
 $id_user = $_SESSION["CIN"];
 $res = mysqli_query($conn,"SELECT * FROM inscrit WHERE cin = '$id_user' and idpartie='0'");
