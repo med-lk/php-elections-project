@@ -19,6 +19,7 @@
 				mysqli_query($conn,"INSERT INTO inscrit(cin,Nom,prenom,adresse,tele,password,datnaiss) VALUES('$cin','$lastName','$firstName','$address','$phone','$password','$birthDate')");
 				$_SESSION["CIN"] = $cin;
 				header('location:user.php');
+				echo"La connexion a ete etablie";
 			}else{ echo "<script>alert('Cin n\'existe pas')</script>";}
 		}else{echo "<script>alert('Ce Citoyen est deja inscrit')</script>";}
 	}	
