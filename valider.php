@@ -39,6 +39,7 @@
 </div>
 <?php
 include('connection.php');
+echo"Connexion Succesfully !!"
 session_start();
 $id_user = $_SESSION["CIN"];
 $idparty = $_GET["idparty"];
