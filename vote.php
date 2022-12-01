@@ -9,6 +9,8 @@
 <style type="text/css">
 .cotainer{
 	margin-top: 80%;
+    padding: 20%;
+    margin-top: 10px;
 
 }
 .inner{
